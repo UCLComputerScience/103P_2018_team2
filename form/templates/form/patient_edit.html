@@ -1,0 +1,31 @@
+{% extends 'form/base.html' %}
+
+{% block title %}
+    Edit Patient
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">
+    Edit Patient
+</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-10">
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action active">
+                Current Patients
+            </p>
+            {% for p in patients %}
+            <a href="{% url 'get_patient_information' p.patient_id %}" class="list-group-item list-group-item-action">
+                {{p.patient_id}} {{p.name}}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
