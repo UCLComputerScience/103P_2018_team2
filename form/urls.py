@@ -1,8 +1,11 @@
 from django.urls import path
-
 from . import views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
+    path('login/', auth_views.login, name='login'),
+    path('authenticate/', views.authenticate, name="authenticate"),
     path('', views.get_patient_dashboard, name='get_patient_dashboard'),
     path('add-patient/', views.add_patient, name='add_patient'),
     path('edit-patient/', views.edit_patient, name='edit_patient'),

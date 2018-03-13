@@ -1,5 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import *
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+
+
+def redirect(request, redirect_url):
+    return HttpResponseRedirect(redirect_url)
+
+
+def authenticate(request):
+    username = request.POST['user']
+    password = request.POST['passw']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        redirect("/")
+        # Redirect to a success page.
+    else:
+        redirect("/admin")
+        # Return an 'invalid login' error message.
 
 
 def add_patient(request):

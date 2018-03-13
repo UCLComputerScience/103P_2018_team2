@@ -12,6 +12,11 @@ class JQueryUIDatepickerWidget(forms.DateInput):
               "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js",)
 
 
+class LoginForm:
+    user = forms.CharField
+    passw = forms.PasswordInput
+
+
 class PatientForm(forms.ModelForm):
 
     class Meta:
