@@ -358,3 +358,77 @@ class PostInject1(models.Model):
 
     def __str__(self):
         return "Post-Injection Follow Up I"
+
+class Dysports(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
+    date = models.DateField()
+    page = 9
+    initials = models.CharField(max_length=100)
+    childweight = models.DecimalField(max_digits=10,decimal_places=2)
+    batchnumber = models.CharField(max_length=100)
+    expirydate = models.DateField()
+    muscle1 = models.CharField(max_length=100,blank=True)
+    dysportunit1 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    Totaldysport1 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    mls1 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    circle_side11 = models.TextField(blank=True)
+    circle_side12 = models.TextField(blank=True)
+    circle_side13 = models.TextField(blank=True)
+    muscle2 = models.CharField(max_length=100,blank=True)
+    dysportunit2 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    Totaldysport2 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    mls2 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    circle_side21 = models.TextField(blank=True)
+    circle_side22 = models.TextField(blank=True)
+    circle_side23 = models.TextField(blank=True)
+    muscle3 = models.CharField(max_length=100,blank=True)
+    dysportunit3 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    Totaldysport3 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    mls3 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    circle_side31 = models.TextField(blank=True)
+    circle_side32 = models.TextField(blank=True)
+    circle_side33 = models.TextField(blank=True)
+    muscle4 = models.CharField(max_length=100,blank=True)
+    dysportunit4 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    Totaldysport4 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    mls4 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    circle_side41 = models.TextField(blank=True)
+    circle_side42 = models.TextField(blank=True)
+    circle_side43 = models.TextField(blank=True)
+    muscle5 = models.CharField(max_length=100,blank=True)
+    dysportunit5 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    Totaldysport5 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    mls5 = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    circle_side51 = models.TextField(blank=True)
+    circle_side52 = models.TextField(blank=True)
+    circle_side53 = models.TextField(blank=True)
+
+    totaldose = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+    totalunits = models.DecimalField(max_digits=100,decimal_places=2,null=True)
+
+
+    def __str__(self):
+        return "Dysport Calculation Sheet"
+
+class Consents(models.Model):
+    Clinician_name = models.CharField(max_length=100)
+    speciality = models.CharField(max_length=50)
+    Clinician_signature = models.CharField(max_length=100)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
+    date = models.DateField()
+
+    def __str__(self):
+        return "Consent to Photography or Video Recording"
+
+class Consentss(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
+    consent_1 = models.BooleanField(help_text="I consent to photographs/video recordings being taken at for my/my child’s personal medical case-notes.")
+    consent_2 = models.BooleanField(help_text="I consent to photographs/video recordings being made available for teaching in the Healthcare context as described above.")
+    consent_3 = models.BooleanField(help_text="I consent to photographs/video recordings being published for the specific purpose described below. This consent does not extend to any further publications. ")
+    patient_signature = models.CharField(max_length=100)
+    parent = models.CharField(max_length=100)
+    date = models.DateField()
+    relations = models.TextField(blank=True)
+    
+    def __str__(self):
+        return "Consent to Photography or Video Recording(2)"
