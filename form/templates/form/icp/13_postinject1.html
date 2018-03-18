@@ -1,7 +1,7 @@
 {% extends 'form/base.html' %}
 
 {% block title %}
-    Conclusion of Treatment
+    Post-Injection Follow Up I
 {% endblock %}
 
 {% block breadcrumb %}
@@ -11,12 +11,12 @@
     </a>
 </li>
 <li class="breadcrumb-item active">
-    Conclusion of Treatment
+    Post-Injection Follow Up I
 </li>
 {% endblock %}
 
 {% block content %}
-    <form method="POST" >
+    <form method="POST">
         {% csrf_token %}
         {% load widget_tweaks %}
 
@@ -56,6 +56,7 @@
             </div>
         {% endfor %}
         <a class="btn btn-secondary" href="{% url 'get_patient_information' patient.patient_id %}"> Back </a>
-        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-success" type="submit" >Save</button>
     </form>
+
 {% endblock %}

@@ -1,26 +1,31 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import *
-from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login
 
+from django.http import *
+from django.shortcuts import render_to_response,redirect, redirect
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib import messages
 
-def redirect(request, redirect_url):
-    return HttpResponseRedirect(redirect_url)
-
-
-def authenticate(request):
-    username = request.POST['user']
-    password = request.POST['passw']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        redirect("/")
-        # Redirect to a success page.
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
-        redirect("/admin")
-        # Return an 'invalid login' error message.
+        form = PasswordChangeForm(request.user)
+    return render(request, 'form/change_password.html', {
+        'form': form
+    })
 
-
+@login_required
 def add_patient(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
@@ -32,22 +37,22 @@ def add_patient(request):
         form = PatientForm()
     return render(request, 'form/patient_add.html', {'form': form})
 
-
+@login_required
 def edit_patient(request):
     patients = Patient.objects.all()
     return render(request, 'form/patient_edit.html', {'patients': patients})
 
-
+@login_required
 def get_patient_information(request, patient_id):
     pat = get_object_or_404(Patient, patient_id=patient_id)
     return render(request, 'form/patient_information.html', {'patient': pat, 'patient_id':patient_id})
 
-
+@login_required
 def get_patient_dashboard(request):
     patients = Patient.objects.all()
     return render(request, 'form/patient_dashboard.html', {'patients':patients})
 
-
+@login_required
 def get_med_clerk_pre_sed(request, patient_id):
     pat = get_object_or_404(Patient, patient_id=patient_id)
     try:
@@ -72,7 +77,7 @@ def get_med_clerk_pre_sed(request, patient_id):
         form = MedClerkPreSedForm()
     return render(request, 'form/icp/11_medclerk.html', {'form': form, 'patient': pat})
 
-
+@login_required
 def get_proc_report(request, patient_id):
     pat = get_object_or_404(Patient, patient_id=patient_id)
     try:
@@ -92,7 +97,32 @@ def get_proc_report(request, patient_id):
         form = ProcReportForm()
     return render(request, 'form/icp/12_procedure_report.html', {'form': form, 'patient': pat})
 
+@login_required
+def get_post_inject1(request, patient_id):
+    pat = get_object_or_404(Patient, patient_id=patient_id)
+    try:
+        # fetch MedClerk page for patient pat
+        postinj1 = PostInject1.objects.get(patient=pat)
+    except Exception:
+        # pat has not created a MedClerk page yet
+        postinj1 = None
+    if request.method == "POST":
+        # filling in the form
+        form = PostInject1Form(request.POST or None, instance=postinj1)
+        if form.is_valid():
+            postinject1 = form.save(commit=False)
+            postinject1.patient = get_object_or_404(Patient, patient_id=patient_id)
+            postinject1.access_date = timezone.now()
+            postinject1.save()
+    elif postinj1 is not None:
+        # view existing/edit
+        form = PostInject1Form(None, instance=postinj1)
+    else:
+        # create new medclerk form
+        form = PostInject1Form()
+    return render(request, 'form/icp/13_postinject1.html', {'form': form, 'patient': pat})
 
+@login_required
 def get_conc_of_treatment(request, patient_id):
     pat = get_object_or_404(Patient, patient_id=patient_id)
     try:

@@ -2,6 +2,9 @@ from django import forms
 from .models import *
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    
 class JQueryUIDatepickerWidget(forms.DateInput):
     def __init__(self, **kwargs):
         super(forms.DateInput, self).__init__(attrs={"size":10, "class": "dateinput"}, **kwargs)
@@ -12,17 +15,14 @@ class JQueryUIDatepickerWidget(forms.DateInput):
               "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js",)
 
 
-class LoginForm:
-    user = forms.CharField
-    passw = forms.PasswordInput
-
-
 class PatientForm(forms.ModelForm):
 
     class Meta:
         model = Patient
         fields = '__all__'
-
+        widgets = {
+            'date_of_birth': DateInput(),
+        }
 
 class MedClerkPreSedForm(forms.ModelForm):
     patient = MedClerkPreSed.patient
@@ -32,9 +32,9 @@ class MedClerkPreSedForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['patient']
         widgets = {
-            'met_time': JQueryUIDatepickerWidget,
-            'oral_sedation_time': JQueryUIDatepickerWidget,
-            'ametop_applied_time': JQueryUIDatepickerWidget,
+            'met_time': DateInput(),
+            'oral_sedation_time': DateInput(),
+            'ametop_applied_time': DateInput(),
         }
 
 
@@ -46,6 +46,7 @@ class ProcReportForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['patient']
         widgets = {
+            'date': DateInput(),
             'ultrasound_1': forms.RadioSelect,
             'ultrasound_2': forms.RadioSelect,
             'ultrasound_3': forms.RadioSelect,
@@ -64,7 +65,17 @@ class ProcReportForm(forms.ModelForm):
             'sedation_effective_no': forms.Textarea(attrs={'placeholder': 'If no, then details of ineffective sedation'}),
         }
 
+class PostInject1Form(forms.ModelForm):
+    patient  = PostInject1.patient
 
+    class Meta:
+        model = PostInject1
+        fields = '__all__'
+        exclude = ['patient']
+        widgets = {
+            'date': DateInput(),
+
+        }
 
 class ConcOfTreatmentForm(forms.ModelForm):
     patient = ConcOfTreatment.patient
@@ -74,7 +85,7 @@ class ConcOfTreatmentForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['patient']
         widgets = {
-            'date': JQueryUIDatepickerWidget,
-            'last_injection': JQueryUIDatepickerWidget,
-            'timeframe': JQueryUIDatepickerWidget,
+            'date': DateInput(),
+            'last_injection': DateInput(),
+            'timeframe': DateInput(),
         }

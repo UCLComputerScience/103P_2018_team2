@@ -55,8 +55,7 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <button type="submit">Save</button>
+        <a class="btn btn-secondary" href="{% url 'get_patient_information' patient.patient_id %}"> Back </a>
+        <button class="btn btn-success" type="submit">Save</button>
     </form>
 {% endblock %}
-
-

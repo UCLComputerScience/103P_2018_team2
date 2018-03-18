@@ -8,4 +8,4 @@ admin.site.register(Patient)
 admin.site.register(MedClerkPreSed)
 admin.site.register(ConcOfTreatment)
 admin.site.register(ProcReport)
-
+admin.site.register(PostInject1)

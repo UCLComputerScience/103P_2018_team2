@@ -25,6 +25,7 @@ class Patient(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     patient_id = models.CharField(max_length=100)
+    date_of_birth = models.DateField()
 
     def name(self):
         return str(self.first_name + " " + self.last_name).upper()
@@ -53,7 +54,7 @@ class MedClerkPreSed(models.Model):
         default='no',
         blank=True
     )
-    met_time = models.DateTimeField()
+    met_time = models.DateField()
     record_medication_changes = models.TextField(
         help_text="Record Medication Changes Since Pre-Injection Assessment",
         blank=True
@@ -74,9 +75,9 @@ class MedClerkPreSed(models.Model):
         default='no',
         blank=True
     )
-    oral_sedation_time = models.DateTimeField()
+    oral_sedation_time = models.DateField()
     number_of_ametop_tubes_used = models.PositiveSmallIntegerField(default=0)
-    ametop_applied_time = models.DateTimeField()
+    ametop_applied_time = models.DateField()
     reasons_for_cancellation = models.TextField(
         help_text="If Applicable, State Reasons for Cancellation",
         blank = True
@@ -95,8 +96,8 @@ class ConcOfTreatment(models.Model):
     access_date = timezone.now()
     page = 19
     completed_by = models.CharField(max_length=5, help_text="Initials")
-    date = models.DateTimeField()
-    last_injection = models.DateTimeField()
+    date = models.DateField()
+    last_injection = models.DateField()
     summary_and_effectiveness_of_injection = models.TextField(
         help_text="Summary of Injection Results",
         blank=True
@@ -115,7 +116,7 @@ class ConcOfTreatment(models.Model):
         help_text="Reason for Re-injection",
         blank=True
     )
-    timeframe = models.DateTimeField()
+    timeframe = models.DateField()
     admin_informed = models.CharField(
         max_length=3,
         choices=YES_NO_CHOICES,
@@ -337,10 +338,23 @@ class ProcReport(models.Model):
     )
     sedation_effective_no = models.TextField(blank=True)
     initials = models.CharField(max_length=5)
-    date = models.DateTimeField()
+    date = models.DateField()
     def __str__(self):
         return "Procedure Report"
 
+class PostInject1(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
+    access_date = timezone.now()
+    page = 13
 
+    date = models.DateField()
 
+    clinician = models.CharField(max_length=200)
 
+    completed_by = models.CharField(max_length=5, help_text="Initials")
+    attending_clinicians = models.CharField(max_length=200, help_text="attending clinicians, seperated by comma")
+    local_team_members = models.CharField(max_length=200, help_text="Enter local team members, seperated by comma")
+    local_team_members = models.CharField(max_length=200, help_text="Enter attending family, seperated by comma")
+
+    def __str__(self):
+        return "Post-Injection Follow Up I"
