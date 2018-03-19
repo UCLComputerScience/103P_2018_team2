@@ -1,0 +1,294 @@
+{% extends 'form/base.html' %}
+
+{% block title %}
+Dysport Calculation Sheet
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'get_patient_information' patient.patient_id %}">
+        {{patient.name}}
+    </a>
+</li>
+<li class="breadcrumb-item active">
+    Dysport Calculation Sheet
+</li>
+{% endblock %}
+
+{% block content %}
+    <form id = 'rendered-form' method="POST">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+
+        <p>{{form.date.label_tag}} {{form.date}}</p>
+        <p>{{form.initials.label_tag}}{{form.initials}}</p>
+        <p>Child's Weight{{form.childweight}}kg</p>
+
+
+        <div>
+            <table class="table table-hover" id="dysports1">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th colspan="3">Circle side(s)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 1 -->
+                <tr>
+                    <th>Muscle to be injected</th>
+                    <th>
+                        <p>{{form.muscle1|attr:"rows:5"| attr:"cols:15"}}</p>
+                    </th>
+                    <th>Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left</th>                
+                </tr>
+                <tr>
+                    <th>Dysport® units/kg</th>
+                    <th>
+                        <p>{{form.dysportunit1|attr:"rows:5"| attr:"cols:15"}}</p>                            
+                        </th>
+                    <th colspan="3">
+                       <p>{{form.circle_side11|attr:"rows:1"| attr:"cols:15"}}</p> 
+                    </th>
+                  </tr>
+    
+                  <tr>
+                    <th>Total Dysport® dose (units)</th>
+                    <th>
+                        <p>{{form.Totaldysport1|attr:"rows:5"| attr:"cols:15"}}</p>
+                    </th>
+                    <th>
+                        <p>{{form.circle_side12|attr:"rows:1"| attr:"cols:15"}}</p>
+                    </th>
+                  </tr>
+    
+                  <tr>
+                    <th>Mls to be injected </th>
+                    <th>
+                        <p>{{form.mls1|attr:"rows:5"| attr:"cols:15"}}</p>
+                    </th>
+                    <th>
+                        <p>{{form.circle_side13|attr:"rows:1"| attr:"cols:15"}}
+                        </th>
+                  </tr>
+    
+                  <tr>
+                        <thead class="table-primary">
+                            <th colspan="4"></th>
+                            </thead>
+                  </tr>
+                  </tbody>
+                </table>
+                  
+                  <table class="table table-hover" id="dysports2">
+    <!-- 2 -->
+                  <tr>
+                        <th>Muscle to be injected</th>
+                        <th>
+                            <p>{{form.muscle2|attr:"rows:5"| attr:"cols:15"}}</p>
+                        </th>
+                        <th>Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left</th>
+                    </tr>
+                    <tr>
+                        <th>Dysport® units/kg</th>
+                        <th>
+                            <p>{{form.dysportunit2|attr:"rows:5"| attr:"cols:15"}}</p>                            
+                            </th>
+                        <th>
+                           <p>{{form.circle_side21|attr:"rows:1"| attr:"cols:15"}}</p> 
+                        </th>
+                      </tr>
+        
+                      <tr>
+                        <th>Total Dysport® dose (units)</th>
+                        <th>
+                            <p>{{form.Totaldysport2|attr:"rows:5"| attr:"cols:15"}}</p>
+                        </th>
+                        <th>
+                            <p>{{form.circle_side22|attr:"rows:1"| attr:"cols:15"}}</p>
+                        </th>
+                      </tr>
+        
+                      <tr>
+                        <th>Mls to be injected </th>
+                        <th>
+                            <p>{{form.mls2|attr:"rows:5"| attr:"cols:15"}}</p>
+                        </th>
+                        <th>
+                            <p>{{form.circle_side23|attr:"rows:1"| attr:"cols:15"}}
+                            </th>
+                      </tr>
+    
+                      <tr>
+                            <thead class="table-primary">
+                                <th colspan="4"></th>
+                                </thead>
+                      </tr>
+                    </table>
+                  <!-- 3 -->
+                  <table class="table table-hover" id="dysports3">
+                  <tr>
+                        <th>Muscle to be injected</th>
+                        <th>
+                            <p>{{form.muscle3|attr:"rows:5"| attr:"cols:15"}}</p>
+                        </th>
+                        <th>Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left</th>
+                    </tr>
+                    <tr>
+                        <th>Dysport® units/kg</th>
+                        <th>
+                            <p>{{form.dysportunit3|attr:"rows:5"| attr:"cols:15"}}</p>                            
+                            </th>
+                        <th>
+                           <p>{{form.circle_side31|attr:"rows:1"| attr:"cols:15"}}</p> 
+                        </th>
+                      </tr>
+        
+                      <tr>
+                        <th>Total Dysport® dose (units)</th>
+                        <th>
+                            <p>{{form.Totaldysport3|attr:"rows:5"| attr:"cols:15"}}</p>
+                        </th>
+                        <th>
+                            <p>{{form.circle_side32|attr:"rows:1"| attr:"cols:15"}}</p>
+                        </th>
+                      </tr>
+        
+                      <tr>
+                            <th>Mls to be injected </th>
+                            <th>
+                                <p>{{form.mls3|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>
+                                <p>{{form.circle_side33|attr:"rows:1"| attr:"cols:15"}}
+                                </th>
+                          </tr>
+        
+                      <tr>
+                            <thead class="table-primary">
+                                <th colspan="4"></th>
+                                </thead>
+                      </tr>
+                    </table>
+        <!--4 -->
+        <table class="table table-hover" id="dysports4">
+                      <tr>
+                            <th>Muscle to be injected</th>
+                            <th>
+                                <p>{{form.muscle4|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left</th>
+                        </tr>
+                        <tr>
+                            <th>Dysport® units/kg</th>
+                            <th>
+                                <p>{{form.dysportunit4|attr:"rows:5"| attr:"cols:15"}}</p>                            
+                                </th>
+                            <th>
+                               <p>{{form.circle_side41|attr:"rows:1"| attr:"cols:15"}}</p> 
+                            </th>
+                          </tr>
+            
+                          <tr>
+                            <th>Total Dysport® dose (units)</th>
+                            <th>
+                                <p>{{form.Totaldysport4|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>
+                                <p>{{form.circle_side42|attr:"rows:1"| attr:"cols:15"}}</p>
+                            </th>
+                          </tr>
+            
+                          <tr>
+                            <th>Mls to be injected </th>
+                            <th>
+                                <p>{{form.mls4|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>
+                                <p>{{form.circle_side43|attr:"rows:1"| attr:"cols:15"}}
+                                </th>
+                          </tr>
+        
+                          <tr>
+                                <thead class="table-primary">
+                                    <th colspan="4"></th>
+                                    </thead>
+                          </tr>
+                        </table>
+                      <!-- 5 -->
+                      <table class="table table-hover" id="dysports5">
+                      <tr>
+                            <th>Muscle to be injected</th>
+                            <th>
+                                <p>{{form.muscle5|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>Right&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left</th>
+                        </tr>
+                        <tr>
+                            <th>Dysport® units/kg</th>
+                            <th>
+                                <p>{{form.dysportunit5|attr:"rows:5"| attr:"cols:15"}}</p>                            
+                                </th>
+                            <th>
+                               <p>{{form.circle_side51|attr:"rows:1"| attr:"cols:15"}}</p> 
+                            </th>
+                          </tr>
+            
+                          <tr>
+                            <th>Total Dysport® dose (units)</th>
+                            <th>
+                                <p>{{form.Totaldysport5|attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>
+                                <p>{{form.circle_side52|attr:"rows:1"| attr:"cols:15"}}</p>
+                            </th>
+                          </tr>
+            
+                          <tr>
+                            <th>Mls to be injected </th>
+                            <th>
+                                <p>{{form.mls5 | attr:"rows:5"| attr:"cols:15"}}</p>
+                            </th>
+                            <th>
+                                <p>{{form.circle_side53 | attr:"rows:1"| attr:"cols:15"}}</p>
+                                </th>
+                          </tr>
+            
+                          <tr>
+                                <thead class="table-primary">
+                                    <th colspan="4"></th>
+                                    </thead>
+                          </tr>
+                        </table>
+                        <table class="table table-hover" id="dysportstotal">
+                          <tr>
+                                <th>Total dose given</th>
+                                <th></th>
+                                <td colspan="3">Units/kg (max = 30 units Dysport®/kg)
+                                </td>
+                            <th>
+                                <p>{{form.totaldose| attr:"rows:1"|attr:"cols:15"}}
+                            </th>
+                            </tr>
+                              <tr>
+                                <th></th>
+                                <th></th>
+                                <td colspan="3">Total units (max = 1000 units Dysport®)</td>
+                                    <th><p>{{form.totalunits|attr:"rows:1"| attr:"cols:15"}}
+                                        </p>
+                                    </th>
+                              </tr>
+                              </table> 
+                            </div>
+
+                            <div class="fb-date form-group field-metwithtime">
+                                <p>Batch number&nbsp;{{form.batchnumber}}</p>
+                                <br>
+                                <br>
+                                <p>Expiry Date&nbsp;{{form.expirydate}}</p>
+                              </div>
+        <a class="btn btn-secondary" href="{% url 'get_patient_information' patient.patient_id %}"> Back </a>
+        <button class="btn btn-success" type="submit" >Save</button>
+        </form>
+    {% endblock %}
+    
