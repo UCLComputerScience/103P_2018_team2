@@ -42,10 +42,10 @@
             <a href="#" class="list-group-item list-group-item-action">
                 Treatment Plan
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{% url 'get_consents' patient_id %}" class="list-group-item list-group-item-action">
                 Consent to Photography or Video Recording
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{% url 'get_dysports' patient_id %}" class="list-group-item list-group-item-action">
                 Dysport Calculation
             </a>
             <a href="{% url 'get_med_clerk_pre_sed' patient_id %}" class="list-group-item list-group-item-action">
