@@ -17,4 +17,7 @@ urlpatterns = [
     path('<int:patient_id>/procedure-report', views.get_proc_report, name='get_proc_report'),
     path('<int:patient_id>/post-inject1', views.get_post_inject1, name='get_post_inject1'),
     path('<int:patient_id>/conclusion-of-treatment', views.get_conc_of_treatment, name='get_conc_of_treatment'),
+    path('<int:patient_id>/consent-to-photography-or-video-recording',views.get_consents,name='get_consents'),
+    path('<int:patient_id>/dysport_calculation_sheet',views.get_dysports,name='get_dysports'),
+    path('<int:patient_id>/consent-to-photography-or-video-recording2',views.get_consentss,name='get_consentss'),
 ]
