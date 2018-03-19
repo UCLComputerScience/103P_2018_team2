@@ -141,3 +141,66 @@ def get_conc_of_treatment(request, patient_id):
     else:
         form = ConcOfTreatmentForm()
     return render(request, 'form/icp/19_conclusion_of_treatment.html', {'form': form, 'patient': pat})
+
+@login_required
+def get_dysports(request,patient_id):
+    pat = get_object_or_404(Patient,patient_id=patient_id)
+    try:
+        dys = Dysports.objects.get(patient=pat)
+    except Exception:
+        dys = None
+    if request.method == "POST":
+        form = DysportForm(request.POST or None,instance=dys)
+        if form.is_valid():
+            dysportform = form.save(commit=False)
+            dysportform.patient = get_object_or_404(Patient,patient_id=patient_id)
+            dysportform.date = timezone.now()
+            dysportform.save()
+    elif dys is not None:
+        form = DysportForm(None,instance=dys)
+    else:
+        form = DysportForm()
+    
+    return render(request,'form/icp/9_dysport_calculation_sheet.html',{'form':form,'patient':pat})
+
+@login_required
+def get_consents(request,patient_id):
+    pat = get_object_or_404(Patient,patient_id=patient_id)
+    try:
+        cons = Consents.objects.get(patient=pat)
+    except Exception:
+        cons = None
+    if request.method == "POST":
+        form = ConsentForm(request.POST or None,instance=cons)
+        if form.is_valid():
+            consentform = form.save(commit=False)
+            consentform.patient = get_object_or_404(Patient,patient_id=patient_id)
+            consentform.date = timezone.now()
+            consentform.save()
+    elif cons is not None:
+        form = ConsentForm(None,instance=cons)
+    else:
+        form = ConsentForm()
+        
+    return render(request,'form/icp/8_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat})
+
+@login_required
+def get_consentss(request,patient_id):
+    pat = get_object_or_404(Patient,patient_id=patient_id)
+    try:
+        conss = Consentss.objects.get(patient=pat)
+    except Exception:
+        conss = None
+    if request.method == "POST":
+        form = ConsentForm2(request.POST or None,instance=conss)
+        if form.is_valid():
+            consentform2 = form.save(commit=False)
+            consentform2.patient = get_object_or_404(Patient,patient_id=patient_id)
+            consentform2.date = timezone.now()
+            consentform2.save()
+    elif conss is not None:
+        form = ConsentForm2(None,instance=conss)
+    else:
+        form = ConsentForm2()
+        
+    return render(request,'form/icp/8_2_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat})
