@@ -89,3 +89,35 @@ class ConcOfTreatmentForm(forms.ModelForm):
             'last_injection': DateInput(),
             'timeframe': DateInput(),
         }
+        
+        
+class DysportForm(forms.ModelForm):
+    patient = Dysports.patient
+    class Meta:
+        model = Dysports
+        fields = '__all__'
+        exclude = ['patient']
+        widgets = {
+            'date': DateInput(),
+            'expirydate': DateInput(),
+        }
+
+class ConsentForm(forms.ModelForm):
+    patient = Consents.patient
+    class Meta:
+        model = Consents
+        fields = '__all__'
+        exclude = ['patient']
+        widgets = {
+            'date': DateInput(),
+        }
+
+class ConsentForm2(forms.ModelForm):
+    patient = Consentss.patient
+    class Meta:
+        model = Consentss
+        fields = '__all__'
+        exclude = ['patient']
+        widgets = {
+            'date': DateInput(),
+        }
