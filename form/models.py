@@ -342,6 +342,7 @@ class ProcReport(models.Model):
     def __str__(self):
         return "Procedure Report"
 
+
 class PostInject1(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
     access_date = timezone.now()
@@ -358,6 +359,7 @@ class PostInject1(models.Model):
 
     def __str__(self):
         return "Post-Injection Follow Up I"
+
 
 class Dysports(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
@@ -410,6 +412,7 @@ class Dysports(models.Model):
     def __str__(self):
         return "Dysport Calculation Sheet"
 
+
 class Consents(models.Model):
     Clinician_name = models.CharField(max_length=100)
     speciality = models.CharField(max_length=50)
@@ -419,6 +422,7 @@ class Consents(models.Model):
 
     def __str__(self):
         return "Consent to Photography or Video Recording"
+
 
 class Consentss(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
