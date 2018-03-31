@@ -1,0 +1,371 @@
+{% extends 'form/base.html' %}
+{% load static %}
+
+{% block title %}
+Post Injection Follow Up I
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'get_patient_information' patient.patient_id %}">
+        {{patient.name}}
+    </a>
+</li>
+<li class="breadcrumb-item active">
+    Post Injection Follow Up I
+</li>
+{% endblock %}
+
+{% block content %}
+<form id="rendered-form" method="POST">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+        <div class="row">
+            <div class="col-6">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Date: {{form.date}}
+                    </p>
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Completed by (initials): {{form.completed_by}}
+                    </p>
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Local team members: {{form.local_team_members}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Weeks post injection: {{form.weeks_postinj1}}
+                    </p>
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Attending clinicians: {{form.attending_clinicians}}
+                    </p>
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Attending family members / carers: {{form.attending_fam_car}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Relaxation in Target Muscles</h4>
+                <br>
+                <table class="table table-bordered" id="postInjectTab1" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Muscle Injected</th>
+                            <th>0 (No)</th>
+                            <th>1 (PARTIAL)</th>
+                            <th>2 (FULL)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{form.musc1_inj}}</td>
+                            <td>{{form.musc1_inj_n}}</td>
+                            <td>{{form.musc1_inj_p}}</td>
+                            <td>{{form.musc1_inj_y}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.musc2_inj}}</td>
+                            <td>{{form.musc2_inj_n}}</td>
+                            <td>{{form.musc2_inj_p}}</td>
+                            <td>{{form.musc2_inj_y}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.musc3_inj}}</td>
+                            <td>{{form.musc3_inj_n}}</td>
+                            <td>{{form.musc3_inj_p}}</td>
+                            <td>{{form.musc3_inj_y}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.musc4_inj}}</td>
+                            <td>{{form.musc4_inj_n}}</td>
+                            <td>{{form.musc4_inj_p}}</td>
+                            <td>{{form.musc4_inj_y}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class ="col">
+                <hr>
+                <h4>Pain Levels</h4>
+                <br>
+            </div>
+        </div>
+        <div class="container">
+            <img src="{% static 'img/pain_scale.png' %}" align="center" alt="Face pain scale">
+            <table class="table table-bordered" align="center" id="postInjPain" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>0</th>
+                        <th>2</th>
+                        <th>4</th>
+                        <th>6</th>
+                        <th>8</th>
+                        <th>10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{form.pain_0}}</td>
+                        <td>{{form.pain_2}}</td>
+                        <td>{{form.pain_4}}</td>
+                        <td>{{form.pain_6}}</td>
+                        <td>{{form.pain_8}}</td>
+                        <td>{{form.pain_10}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Achieved treatment goals</h4>
+                <br>
+                <table class="table table-bordered" id="postInject1Goals" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Goal</th>
+                            <th>Yes</th>
+                            <th>No</th>
+                            <th>Partial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{form.goal_1}}</td>
+                            <td>{{form.goal_1_y}}</td>
+                            <td>{{form.goal_1_n}}</td>
+                            <td>{{form.goal_1_p}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.goal_2}}</td>
+                            <td>{{form.goal_2_y}}</td>
+                            <td>{{form.goal_2_n}}</td>
+                            <td>{{form.goal_2_p}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.goal_3}}</td>
+                            <td>{{form.goal_3_y}}</td>
+                            <td>{{form.goal_3_n}}</td>
+                            <td>{{form.goal_3_p}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{form.goal_4}}</td>
+                            <td>{{form.goal_4_y}}</td>
+                            <td>{{form.goal_4_n}}</td>
+                            <td>{{form.goal_4_p}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Child/Family goals(0-10)</h4>
+                <p><i>using Modified Canadian Occupational Performance (COPM) scores.</i></p>
+                {{form.child_fam_goals}}
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Therapy Intervention</h4>
+                {{form.therapy_intervention}}
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Physical Activity</h4>
+                {{form.physical_activity}}
+                <br>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h4>Family Opinions</h4>
+                <p><i>family opinions regarding changed post injection</i></p>
+                {{form.family_opinions}}
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h3>Therapy Feedback</h3>
+                <h6>Were orthadontic changes made</h6>
+                    <p>
+                        {% for radio in form.orth_changes_made %}
+                        {{ radio }}
+                        {% endfor %}
+                    </p>
+                    <p>{{form.orth_changes}}</p>
+                    <br>
+                <h6>Have therapy changes been implemented</h6>
+                    <p>
+                        {% for radio in form.therapy_implemented_made %}
+                        {{ radio }}
+                        {% endfor %}
+                    </p>
+                    <p>{{form.therapy_implemented}}</p>
+                    <br>
+                <h6>Has casting been completed</h6>
+                    <p>
+                        {% for radio in form.casting_complete_made %}
+                        {{ radio }}
+                        {% endfor %}
+                    </p>
+                    <p>{{form.casting_complete}}</p>
+                    <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h3>Recovery and any side effects</h3>
+                <p>BTX-A related / procedure related</p>
+                <p><i>***If significant side effect please record if any intervention is necessary***</i></p>
+                <h6>Day Case Experience</h6>
+                    <p><i>(including sedation)</i></p>
+                    <p>{{form.day_case}}</p>
+                    <br>
+                <h6>Side Effects</h6>
+                    <p><i>Ask specifically about bladder/bowel disturbances, flu like symptoms, increased weakness, trips and falls etc.</i></p>
+                    <p>
+                        {% for radio in form.side_effects_choices %}
+                        {{ radio }}
+                        {% endfor %}
+                    </p>
+                    <p>{{form.side_effects}}</p>
+                    <br>
+                <h6>Positive Effects</h6>
+                    <p><i>including stretches, pain, sleeping etc. Any carry over to functional improvement?</i></p>
+                    <p>{{form.pos_effects}}</p>
+                    <br>
+                <h6>Negative Effects</h6>
+                    <p>{{form.neg_effects}}</p>
+                    <br>
+                <h6>Changes in Medical Care</h6>
+                    <p><i>including medication</i></p>
+                    <p>{{form.changes_medical}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Initials: {{form.completed_by1}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Date: {{form.date1}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <br>
+                <hr>
+                <h3>Examination</h3>
+                <p><i>Please complete ROM charts</i></p>
+                <p>{{form.post_inj_examination}}</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h5>Changes/ goal attainment/ standardised assessments</h5>
+                <h6>GMFM Scores</h6>
+                <table class="table table-bordered" align="center" id="GMFM" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{form.GMFM_A}}</td>
+                        <td>{{form.GMFM_B}}</td>
+                        <td>{{form.GMFM_C}}</td>
+                        <td>{{form.GMFM_D}}</td>
+                        <td>{{form.GMFM_E}}</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <br>
+                <p>AHA: {{form.AHA}}</p>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="col-3">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        TUG Score: {{form.TUG}} (seconds)
+                    </p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        1MFWT: {{form.MFWT}} (metres)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <br>
+                <h6>Summary of changes</h6>
+                <p>
+                    {{form.post_inj_summary}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Initials: {{form.completed_by2}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-action active" style="color:black;background-color:white;border:none">
+                        Date: {{form.date2}}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+    <a class="btn btn-secondary" href="{% url 'get_patient_information' patient.patient_id %}"> Back </a>
+    <button class="btn btn-success" type="submit">Save</button>
+</form>
+{% endblock %}

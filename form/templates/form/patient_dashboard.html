@@ -20,7 +20,7 @@ Patient Dashboard
 <div class="row">
     <div class="col-5">
         <a href="/add-patient">
-            <div class="card text-white bg-success mb-3" style="max-width: 30rem;" style="max-height: 80rem;">
+            <div class="card text-white bg-success mb-3" style="max-width: 30rem;max-height: 80rem;background-color:#1E4674!important;">
                 <div class="card-header">Start New Patient Form</div>
                 <div class="card-body">
                     <h4 class="card-title">Add A New Patient</h4>
@@ -31,7 +31,7 @@ Patient Dashboard
     </div>
     <div class="col-5">
         <a href="/edit-patient">
-            <div class="card text-white bg-warning mb-2" style="max-width: 30rem;" style="max-height: 80rem;">
+            <div class="card text-white bg-warning mb-2" style="max-width: 30rem;max-height: 80rem;background-color:#FCD000!important;">
                 <div class="card-header">Edit Existing Form</div>
                 <div class="card-body">
                     <h4 class="card-title">Edit Existing Patient Information</h4>
@@ -72,14 +72,14 @@ Patient Dashboard
                   <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.first_name}}</td>
                   <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.last_name}}</td>
                   <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.patient_id}}</td>
-                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.date_of_birth}}</td>
+                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.date_of_birth | date:'d/m/Y'}}</td>
                 </tr>
               {% endfor %}
-              </tbody>
+            </tbody>
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted">Updated, {{db_time}}</div>
       </div>
     </div>
 {% endblock %}

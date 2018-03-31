@@ -1,10 +1,12 @@
 from django import forms
 from .models import *
+from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.translation import gettext as _
 
 
 class DateInput(forms.DateInput):
     input_type = 'date'
-    
+
 class JQueryUIDatepickerWidget(forms.DateInput):
     def __init__(self, **kwargs):
         super(forms.DateInput, self).__init__(attrs={"size":10, "class": "dateinput"}, **kwargs)
@@ -26,7 +28,6 @@ class PatientForm(forms.ModelForm):
 
 class MedClerkPreSedForm(forms.ModelForm):
     patient = MedClerkPreSed.patient
-
     class Meta:
         model = MedClerkPreSed
         fields = '__all__'
@@ -66,7 +67,7 @@ class ProcReportForm(forms.ModelForm):
         }
 
 class PostInject1Form(forms.ModelForm):
-    patient  = PostInject1.patient
+    patient = PostInject1.patient
 
     class Meta:
         model = PostInject1
@@ -74,6 +75,51 @@ class PostInject1Form(forms.ModelForm):
         exclude = ['patient']
         widgets = {
             'date': DateInput(),
+
+            'musc1_inj': forms.TextInput(attrs={'style':"width:100%;border:none;"}),
+            'musc2_inj': forms.TextInput(attrs={'style':"width:100%;border:none;"}),
+            'musc3_inj': forms.TextInput(attrs={'style':"width:100%;border:none;"}),
+            'musc4_inj': forms.TextInput(attrs={'style':"width:100%;border:none;"}),
+
+            'goal_1': forms.Textarea(attrs={'style':"width:100%;height:100px;border:none;"}),
+            'goal_2': forms.Textarea(attrs={'style':"width:100%;height:100px;border:none;"}),
+            'goal_3': forms.Textarea(attrs={'style':"width:100%;height:100px;border:none;"}),
+            'goal_4': forms.Textarea(attrs={'style':"width:100%;height:100px;border:none;"}),
+
+
+            'child_fam_goals': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'therapy_intervention': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'physical_activity': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'family_opinions': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+
+            'orth_changes_made': forms.RadioSelect,
+            'orth_changes': forms.Textarea(attrs={'placeholder': 'If yes, please specify changes made','style':"width:80%;height:200px"}),
+            'therapy_implemented_made': forms.RadioSelect,
+            'therapy_implemented': forms.Textarea(attrs={'placeholder': 'If yes, please specify details','style':"width:80%;height:200px"}),
+            'casting_complete_made': forms.RadioSelect,
+            'casting_complete': forms.Textarea(attrs={'placeholder': 'If yes, please specify outcome','style':"width:80%;height:200px"}),
+
+            'day_case': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'side_effects_choices': forms.RadioSelect,
+            'side_effects': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'pos_effects': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'neg_effects': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'changes_medical': forms.Textarea(attrs={'style':"width:80%;height:200px"}),
+            'date1': DateInput(),
+
+            'post_inj_examination': forms.Textarea(attrs={'style':"width:80%;height:400px"}),
+
+            'GMFM_A': forms.TextInput(attrs={'style': "width:100%;border:none;"}),
+            'GMFM_B': forms.TextInput(attrs={'style': "width:100%;border:none;"}),
+            'GMFM_C': forms.TextInput(attrs={'style': "width:100%;border:none;"}),
+            'GMFM_D': forms.TextInput(attrs={'style': "width:100%;border:none;"}),
+            'GMFM_E': forms.TextInput(attrs={'style': "width:100%;border:none;"}),
+
+            'AHA': forms.TextInput(attrs={'size':"30"}),
+
+            'post_inj_summary': forms.Textarea(attrs={'style':"width:80%;height:400pxs"}),
+
+            'date2': DateInput()
 
         }
 
@@ -89,8 +135,8 @@ class ConcOfTreatmentForm(forms.ModelForm):
             'last_injection': DateInput(),
             'timeframe': DateInput(),
         }
-        
-        
+
+
 class DysportForm(forms.ModelForm):
     patient = Dysports.patient
     class Meta:
