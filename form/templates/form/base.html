@@ -69,6 +69,10 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a class="nav-link">
+            <i></i>{{date}}</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
@@ -147,5 +151,43 @@
     </script>
   </div>
 </body>
+
+<style type ="text/css" >
+  a {
+    color: #51759E;
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+  a:hover {
+    color: #0E345E;
+    text-decoration: underline;
+  }
+
+  .btn-primary {
+      color: #fff;
+      background-color: #51759E;
+      border-color: #51759E;
+  }
+
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #1E4774;
+    border-color: #1E4774;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+    color: #fff;
+    background-color: #1E4774;
+    border-color: #1E4774;
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #51759E;
+    border-color: #51759E;
+}
+</style>
 
 </html>
