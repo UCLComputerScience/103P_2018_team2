@@ -1,5 +1,3 @@
-import datetime
-
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -11,7 +9,7 @@ from .forms import *
 
 
 def current_date():
-    return datetime.date.today()
+    return date.today()
 
 @login_required
 def change_password(request):
@@ -48,7 +46,7 @@ def add_patient(request):
 
 @login_required
 def edit_patient(request):
-    time = datetime.datetime.now()
+    time = datetime.now()
     patients = Patient.objects.all()
     return render(request, 'form/patient_edit.html', {'patients': patients, 'db_time': time, 'date': current_date()}, )
 
@@ -59,7 +57,7 @@ def get_patient_information(request, patient_id):
 
 @login_required
 def get_patient_dashboard(request):
-    time = datetime.datetime.now()
+    time = datetime.now()
     patients = Patient.objects.all()
     return render(request, 'form/patient_dashboard.html', {'patients':patients, 'db_time': time, 'date': current_date()}, )
 
