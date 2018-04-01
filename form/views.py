@@ -11,6 +11,9 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
+def current_date():
+    return datetime.date.today()
+
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -42,24 +45,24 @@ def add_patient(request):
             return redirect('../' + str(id))
     else:
         form = PatientForm()
-    return render(request, 'form/patient_add.html', {'form': form})
+    return render(request, 'form/patient_add.html', {'form': form, 'date': current_date()})
 
 @login_required
 def edit_patient(request):
     time = datetime.datetime.now()
     patients = Patient.objects.all()
-    return render(request, 'form/patient_edit.html', {'patients': patients, 'db_time': time}, )
+    return render(request, 'form/patient_edit.html', {'patients': patients, 'db_time': time, 'date': current_date()}, )
 
 @login_required
 def get_patient_information(request, patient_id):
     pat = get_object_or_404(Patient, patient_id=patient_id)
-    return render(request, 'form/patient_information.html', {'patient': pat, 'patient_id':patient_id})
+    return render(request, 'form/patient_information.html', {'patient': pat, 'patient_id':patient_id, 'date': current_date()})
 
 @login_required
 def get_patient_dashboard(request):
     time = datetime.datetime.now()
     patients = Patient.objects.all()
-    return render(request, 'form/patient_dashboard.html', {'patients':patients, 'db_time': time}, )
+    return render(request, 'form/patient_dashboard.html', {'patients':patients, 'db_time': time, 'date': current_date()}, )
 
 @login_required
 def get_med_clerk_pre_sed(request, patient_id):
@@ -85,7 +88,7 @@ def get_med_clerk_pre_sed(request, patient_id):
     else:
         # create new medclerk form
         form = MedClerkPreSedForm()
-    return render(request, 'form/icp/11_medclerk.html', {'form': form, 'patient': pat})
+    return render(request, 'form/icp/11_medclerk.html', {'form': form, 'patient': pat, 'date': current_date()})
 
 '''
 @login_required
@@ -118,7 +121,7 @@ def get_post_inject1(request, patient_id):
         form = PostInject1Form(None, instance=postinj)
     else:
         form = PostInject1Form()
-    return render(request, 'form/icp/13_post_inject1.html', {'form': form, 'patient': pat})\
+    return render(request, 'form/icp/13_post_inject1.html', {'form': form, 'patient': pat, 'date': current_date()})\
 
 @login_required
 def get_post_inject2(request, patient_id):
@@ -139,7 +142,7 @@ def get_post_inject2(request, patient_id):
         form = PostInject2Form(None, instance=postinj2)
     else:
         form = PostInject2Form()
-    return render(request, 'form/icp/14_post_inject2.html', {'form': form, 'patient': pat})
+    return render(request, 'form/icp/14_post_inject2.html', {'form': form, 'patient': pat, 'date': current_date()})
 
 @login_required
 def get_proc_report(request, patient_id):
@@ -160,7 +163,7 @@ def get_proc_report(request, patient_id):
         form = ProcReportForm(None, instance=proc)
     else:
         form = ProcReportForm()
-    return render(request, 'form/icp/12_procedure_report.html', {'form': form, 'patient': pat})
+    return render(request, 'form/icp/12_procedure_report.html', {'form': form, 'patient': pat, 'date': current_date()})
 
 @login_required
 def get_conc_of_treatment(request, patient_id):
@@ -181,7 +184,7 @@ def get_conc_of_treatment(request, patient_id):
         form = ConcOfTreatmentForm(None, instance=conc)
     else:
         form = ConcOfTreatmentForm()
-    return render(request, 'form/icp/19_conclusion_of_treatment.html', {'form': form, 'patient': pat})
+    return render(request, 'form/icp/19_conclusion_of_treatment.html', {'form': form, 'patient': pat, 'date': current_date()})
 
 @login_required
 def get_dysports(request,patient_id):
@@ -203,7 +206,7 @@ def get_dysports(request,patient_id):
     else:
         form = DysportForm()
 
-    return render(request,'form/icp/9_dysport_calculation_sheet.html',{'form':form,'patient':pat})
+    return render(request,'form/icp/9_dysport_calculation_sheet.html',{'form':form,'patient':pat, 'date': current_date()})
 
 @login_required
 def get_consents(request,patient_id):
@@ -224,7 +227,7 @@ def get_consents(request,patient_id):
     else:
         form = ConsentForm()
 
-    return render(request,'form/icp/8_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat})
+    return render(request,'form/icp/8_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat, 'date': current_date()})
 
 @login_required
 def get_consentss(request,patient_id):
@@ -246,4 +249,4 @@ def get_consentss(request,patient_id):
     else:
         form = ConsentForm2()
 
-    return render(request,'form/icp/8_2_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat})
+    return render(request,'form/icp/8_2_consent_to_photography_or_video_recording.html',{'form':form,'patient':pat, 'date': current_date()})
