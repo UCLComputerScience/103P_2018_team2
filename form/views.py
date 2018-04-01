@@ -1,14 +1,14 @@
-from django.shortcuts import render, get_object_or_404
-from .forms import *
-
+#Python imports
 import datetime
 
-from django.http import *
-from django.shortcuts import render_to_response,redirect, redirect
-from django.template import RequestContext
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+#Local imports
+from .forms import *
+
+#Django imports
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext as _
 
 def current_date():

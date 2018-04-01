@@ -1,6 +1,9 @@
+#Local imports
+from .validators import *
+
+#Django imports
 from django.db import models
 from django.utils import timezone
-from .validators import *
 
 YES_NO_NA_CHOICES = (
         ('yes', 'Yes'),

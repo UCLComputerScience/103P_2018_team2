@@ -1,8 +1,8 @@
-from django import forms
+#Local imports
 from .models import *
-from django.contrib.auth.forms import PasswordChangeForm
-from django.utils.translation import gettext as _
 
+#Django imports
+from django import forms
 
 class DateInput(forms.DateInput):
     input_type = 'date'
