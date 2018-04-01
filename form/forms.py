@@ -1,7 +1,6 @@
 from django import forms
+
 from .models import *
-from django.contrib.auth.forms import PasswordChangeForm
-from django.utils.translation import gettext as _
 
 
 class DateInput(forms.DateInput):
