@@ -1,9 +1,6 @@
-#Python imports
-from datetime import date, datetime
-
-#Django imports
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from datetime import date, datetime
 
 def val_pat_id(value):
     if not str(value).isalnum():

@@ -1,11 +1,10 @@
-#Local imports
-from . import views
-
-#Django imports
 from django.urls import path
 from django.contrib import admin
-from django.conf.urls import include, url
+from . import views
+
 import django.contrib.auth.views as auth_views
+from django.conf.urls import include, url
+
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'form/login.html'}, name='login'),
