@@ -17,6 +17,7 @@ urlpatterns = [
     path('<patient_id>/medical-clerking-pre-sedation', views.get_med_clerk_pre_sed, name='get_med_clerk_pre_sed'),
     path('<patient_id>/procedure-report', views.get_proc_report, name='get_proc_report'),
     path('<patient_id>/post-injection-follow-up-1', views.get_post_inject1, name='get_post_inject1'),
+    path('<patient_id>/post-injection-follow-up-2', views.get_post_inject2, name='get_post_inject2'),
     path('<patient_id>/conclusion-of-treatment', views.get_conc_of_treatment, name='get_conc_of_treatment'),
     path('<patient_id>/consent-to-photography-or-video-recording',views.get_consents,name='get_consents'),
     path('<patient_id>/dysport_calculation_sheet',views.get_dysports,name='get_dysports'),

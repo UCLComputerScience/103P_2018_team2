@@ -1,9 +1,6 @@
-import datetime
 from django.db import models
 from django.utils import timezone
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext as _
-from datetime import date, datetime
+from .validators import *
 
 YES_NO_NA_CHOICES = (
         ('yes', 'Yes'),
@@ -28,40 +25,17 @@ PAIN_CHOICES = (
     ('full', "Full"),
 )
 
-def val_pat_id(value):
-    if str(value)[0] == "0":
-        raise ValidationError(
-            _('Patient id cannot start with a 0'),
-            params={'value': value},
-        )
-
-    elif not value.isdigit():
-        raise ValidationError(
-            _('Patient id can only contain digits'),
-            params={'value': value},
-        )
-
-def valid_dob(value):
-    today = datetime.now()
-    min = datetime(1980, 1, 1, 1, 0, 0)
-    dob = datetime.strptime(str(value), '%Y-%m-%d')
-    if dob > today or dob < min:
-        raise ValidationError(
-            _('Please enter a valid date of birth'),
-            params={'value': value},
-        )
-
 class Patient(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100,)
-    patient_id = models.CharField(max_length=100, unique=True)
+    patient_id = models.CharField(max_length=100, validators=[val_pat_id], unique=True)
     date_of_birth = models.DateField(validators=[valid_dob])
 
     def name(self):
         return str(self.first_name + " " + self.last_name).upper()
 
     def __str__(self):
-        return (self.name() + " " + self.patient_id)
+        return (self.name() + " " + str(self.patient_id))
 
 
 class MedClerkPreSed(models.Model):
@@ -374,6 +348,135 @@ class ProcReport(models.Model):
 
 
 class PostInject1(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
+    access_date = timezone.now()
+
+    date = models.DateField(blank=True)
+    completed_by = models.CharField(max_length=5)
+    local_team_members = models.CharField(max_length=200)
+
+    weeks_postinj1 = models.PositiveSmallIntegerField(default=0)
+    attending_clinicians = models.CharField(max_length=200)
+    attending_fam_car = models.CharField(max_length=200)
+
+    musc1_inj = models.CharField(max_length=200)
+    musc1_inj_n = models.BooleanField()
+    musc1_inj_p = models.BooleanField()
+    musc1_inj_y = models.BooleanField()
+
+    musc2_inj = models.CharField(max_length=200)
+    musc2_inj_n = models.BooleanField()
+    musc2_inj_p = models.BooleanField()
+    musc2_inj_y = models.BooleanField()
+
+    musc3_inj = models.CharField(max_length=200)
+    musc3_inj_n = models.BooleanField()
+    musc3_inj_p = models.BooleanField()
+    musc3_inj_y = models.BooleanField()
+
+    musc4_inj = models.CharField(max_length=200)
+    musc4_inj_n = models.BooleanField()
+    musc4_inj_p = models.BooleanField()
+    musc4_inj_y = models.BooleanField()
+
+    #face pain-scale options
+    pain_0 = models.BooleanField()
+    pain_2 = models.BooleanField()
+    pain_4 = models.BooleanField()
+    pain_6 = models.BooleanField()
+    pain_8 = models.BooleanField()
+    pain_10 = models.BooleanField()
+
+    goal_1 = models.TextField(blank=True)
+    goal_1_y = models.BooleanField()
+    goal_1_n = models.BooleanField()
+    goal_1_p = models.BooleanField()
+
+    goal_2 = models.TextField(blank=True)
+    goal_2_y = models.BooleanField()
+    goal_2_n = models.BooleanField()
+    goal_2_p = models.BooleanField()
+
+    goal_3 = models.TextField(blank=True)
+    goal_3_y = models.BooleanField()
+    goal_3_n = models.BooleanField()
+    goal_3_p = models.BooleanField()
+
+    goal_4 = models.TextField(blank=True)
+    goal_4_y = models.BooleanField()
+    goal_4_n = models.BooleanField()
+    goal_4_p = models.BooleanField()
+
+    child_fam_goals = models.TextField()
+    therapy_intervention = models.TextField()
+    physical_activity = models.TextField()
+    family_opinions = models.TextField()
+
+    orth_changes_made = models.CharField(
+        max_length=3,
+        choices=YES_NO_NA_CHOICES,
+        blank=True,
+    )
+    orth_changes = models.TextField(blank=True)
+
+    therapy_implemented_made = models.CharField(
+        max_length=3,
+        choices=YES_NO_NA_CHOICES,
+        blank=True,
+    )
+    therapy_implemented = models.TextField(blank=True)
+
+    casting_complete_made = models.CharField(
+        max_length=3,
+        choices=YES_NO_NA_CHOICES,
+        default='',
+        blank=True,
+    )
+    casting_complete = models.TextField(blank=True)
+
+
+    day_case = models.TextField(blank=True)
+
+    side_effects_choices = models.CharField(
+        max_length = 3,
+        choices=YES_NO_NA_CHOICES,
+        default = '',
+        blank=True
+    )
+    side_effects = models.TextField(blank=True)
+
+    pos_effects = models.TextField(blank=True)
+
+    neg_effects = models.TextField(blank=True)
+
+    changes_medical = models.TextField(blank=True)
+
+    date1 = models.DateField()
+
+    completed_by1 = models.CharField(max_length = 5)
+
+    post_inj_examination = models.TextField(blank=True)
+
+    GMFM_A = models.CharField(max_length=20, blank=True)
+    GMFM_B = models.CharField(max_length=20, blank=True)
+    GMFM_C = models.CharField(max_length=20, blank=True)
+    GMFM_D = models.CharField(max_length=20, blank=True)
+    GMFM_E = models.CharField(max_length=20, blank=True)
+
+    AHA = models.CharField(max_length=200)
+
+    TUG = models.CharField(max_length=200)
+    MFWT= models.CharField(max_length=200)
+
+    post_inj_summary = models.TextField(blank=True)
+
+    date2 = models.DateField(blank=True)
+    completed_by2 = models.CharField(max_length=5)
+
+    def __str__(self):
+        return "Post Injection Follow up 1"
+
+class PostInject2(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, default=0)
     access_date = timezone.now()
 

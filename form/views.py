@@ -118,7 +118,28 @@ def get_post_inject1(request, patient_id):
         form = PostInject1Form(None, instance=postinj)
     else:
         form = PostInject1Form()
-    return render(request, 'form/icp/13_post_inject1.html', {'form': form, 'patient': pat})
+    return render(request, 'form/icp/13_post_inject1.html', {'form': form, 'patient': pat})\
+
+@login_required
+def get_post_inject2(request, patient_id):
+    pat = get_object_or_404(Patient, patient_id=patient_id)
+    try:
+        postinj2 = PostInject2.objects.get(patient=pat)
+    except Exception:
+        postinj2 = None
+    if request.method == "POST":
+        form = PostInject2Form(request.POST or None, instance=postinj2)
+        if form.is_valid():
+            postinj2 = form.save(commit=False)
+            postinj2.patient = get_object_or_404(Patient, patient_id=patient_id)
+            postinj2.access_date = timezone.now()
+            postinj2.save()
+            return redirect('/'+str(patient_id))
+    elif postinj2 is not None:
+        form = PostInject2Form(None, instance=postinj2)
+    else:
+        form = PostInject2Form()
+    return render(request, 'form/icp/14_post_inject2.html', {'form': form, 'patient': pat})
 
 @login_required
 def get_proc_report(request, patient_id):
