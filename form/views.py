@@ -29,8 +29,6 @@ def change_password(request):
         'form': form
     })
 
-
-
 @login_required
 def add_patient(request):
     if request.method == "POST":
