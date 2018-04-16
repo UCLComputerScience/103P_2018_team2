@@ -1,0 +1,354 @@
+{% extends 'form/base.html' %}
+
+{% block title %}
+Procedure Report
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'get_patient_information' patient.patient_id %}">
+        {{patient.name}}
+    </a>
+</li>
+<li class="breadcrumb-item active">
+    Procedure Report
+</li>
+{% endblock %}
+
+{% block content %}
+<form id="rendered-form" method="POST">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    <!-- TABLE 1 NOTING MUSCLE INJECTIONS: Split into three tables so there's adequate room in columns -->
+    <div>
+        <table class="table table-hover" id="muscle_tests0">
+            <thead class="table-primary">
+            <tr>
+                <th scope="col">
+                    <!-- Blank -->
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_1.label_tag}} {{form.muscle_1}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_2.label_tag}} {{form.muscle_2}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_3.label_tag}} {{form.muscle_3}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_4.label_tag}} {{form.muscle_4}}</p>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Muscles Injected and Sites</th>
+                <td>
+                    <p>{{form.musc_inject_1|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_2|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_3|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_4|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Used Ultrasound Guidance?</th>
+                <td>
+                    {% for radio in form.ultrasound_1 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_2 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_3 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_4 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <br>
+            </tr>
+            <tr>
+                <th scope="row">Comments on Placement</th>
+                <td>
+                    <p>{{form.placement_1|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_2|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_3|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_4|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">How Well Tolerated?</th>
+                <td>
+                    <p>{{form.tolerated_1|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_2|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_3|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_4|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <br>
+    <!-- TABLE 2 NOTING MUSCLE INJECTIONS: Split into three tables so there's adequate room in columns -->
+    <div>
+        <table class="table table-hover" id="muscle_tests1">
+            <thead class="table-primary">
+            <tr>
+                <th scope="col">
+                    <!-- Blank -->
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_5.label_tag}} {{form.muscle_5}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_6.label_tag}} {{form.muscle_6}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_7.label_tag}} {{form.muscle_7}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_8.label_tag}} {{form.muscle_8}}</p>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Muscles Injected and Sites</th>
+                <td>
+                    <p>{{form.musc_inject_5|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_6|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_7|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_8|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Used Ultrasound Guidance?</th>
+                <td>
+                    {% for radio in form.ultrasound_5 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_6 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_7 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_8 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <br>
+            </tr>
+            <tr>
+                <th scope="row">Comments on Placement</th>
+                <td>
+                    <p>{{form.placement_5|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_6|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_7|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_8|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">How Well Tolerated?</th>
+                <td>
+                    <p>{{form.tolerated_5|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_6|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_7|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_8|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <br>
+    <!-- TABLE 3 NOTING MUSCLE INJECTIONS: Split into three tables so there's adequate room in columns -->
+    <div>
+        <table class="table table-hover" id="muscle_tests2">
+            <thead class="table-primary">
+            <tr>
+                <th scope="col">
+                    <!-- Blank -->
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_9.label_tag}} {{form.muscle_9}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_10.label_tag}} {{form.muscle_10}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_11.label_tag}} {{form.muscle_11}}</p>
+                </th>
+                <th scope="col">
+                    <p>{{form.muscle_12.label_tag}} {{form.muscle_12}}</p>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Muscles Injected and Sites</th>
+                <td>
+                    <p>{{form.musc_inject_9|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_10|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_11|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.musc_inject_12|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Used Ultrasound Guidance?</th>
+                <td>
+                    {% for radio in form.ultrasound_9 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_10 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_11 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for radio in form.ultrasound_12 %}
+                    {{ radio }}
+                    {% endfor %}
+                </td>
+                <br>
+            </tr>
+            <tr>
+                <th scope="row">Comments on Placement</th>
+                <td>
+                    <p>{{form.placement_9|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_10|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_11|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.placement_12|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">How Well Tolerated?</th>
+                <td>
+                    <p>{{form.tolerated_9|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_10|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_11|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+                <td>
+                    <p>{{form.tolerated_12|attr:"rows:5"| attr:"cols:15"}}</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <br>
+    <!-- GENERAL COMMENTS: Log Adverse Events and Details of Effective Sedation -->
+    <div class="container">
+        <h4> General Comments </h4>
+        <div class="row">
+            <div class="col-6">
+                <p>
+                    Adverse Event at Time of Injection?
+                    {% for radio in form.adverse_event %}
+                    {{ radio }}
+                    {% endfor %}
+                </p>
+                {{form.adverse_event_yes}}
+                <br>
+            </div>
+            <div class="col-6">
+                <p>
+                    Sedation Effective?
+                    {% for radio in form.sedation_effective %}
+                    {{ radio }}
+                    {% endfor %}
+                </p>
+                {{form.sedation_effective_no}}
+                <br>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <p>{{ form.initials.label_tag }} {{ form.initials }}</p>
+            </div>
+            <div class="col-6">
+                <p>{{ form.date.label_tag }} {{ form.date }}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-secondary" href="{% url 'get_patient_information' patient.patient_id %}"> Back </a>
+    <button class="btn btn-success" type="submit">Save</button>
+</form>
+{% endblock %}

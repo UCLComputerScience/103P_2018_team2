@@ -1,0 +1,91 @@
+{% extends 'form/base.html' %}
+
+{% block title %}
+    Patient Information
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">
+    {{patient.name}}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action active" style="background-color:#1E4674;border-color:#1E4674">
+                Part I: Pre-Injection
+            </p>
+            <a href="#" class="list-group-item list-group-item-action">
+                Patient Details
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Pre-Assessment Details
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Pre-Injection
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Range of Movement (Upper Limb)
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Range of Movement (Lower Limb)
+            </a>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action active" style="background-color:#1E4674;border-color:#1E4674">
+                Part II: Injection
+            </p>
+            <a href="#" class="list-group-item list-group-item-action">
+                Treatment Plan
+            </a>
+            <a href="{% url 'get_consents' patient_id %}" class="list-group-item list-group-item-action">
+                Consent to Photography or Video Recording
+            </a>
+            <a href="{% url 'get_dysports' patient_id %}" class="list-group-item list-group-item-action">
+                Dysport Calculation
+            </a>
+            <a href="{% url 'get_med_clerk_pre_sed' patient_id %}" class="list-group-item list-group-item-action">
+                Medical Clerking, Pre-Sedation
+            </a>
+            <a href="{% url 'get_proc_report' patient_id %}" class="list-group-item list-group-item-action">
+                Procedure Report
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
+<br>
+<div class="row">
+    <div class="col-6">
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action active" style="background-color:#1E4674;border-color:#1E4674">
+                Part III: Post-Injection
+            </p>
+            <a href="{% url 'get_post_inject1' patient_id %}" class="list-group-item list-group-item-action">
+                Post-Injection Follow Up I
+            </a>
+            <a href="{% url 'get_post_inject2' patient_id %}" class="list-group-item list-group-item-action">
+                Post-Injection Follow Up II
+            </a>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="list-group">
+            <p class="list-group-item list-group-item-action active" style="background-color:#1E4674;border-color:#1E4674">
+                Part VI: Conclusion
+            </p>
+            <a href="{% url 'get_conc_of_treatment' patient_id %}" class="list-group-item list-group-item-action">
+                Conclusion of Treatment
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

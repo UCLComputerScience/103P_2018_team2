@@ -1,0 +1,85 @@
+{% extends 'form/base.html' %}
+
+{% block title %}
+Patient Dashboard
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">
+    Patient Dashboard
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="row1">
+    <br>
+    <h4>Welcome, {{user.first_name}} {{user.last_name}}</h4>
+    <hr>
+    <br>
+</div>
+<div class="row">
+    <div class="col-4">
+        <a href="/add-patient">
+            <div class="card text-white bg-success mb-3" style="max-width: 30rem;max-height: 80rem;background-color:#1E4674!important;">
+                <div class="card-header">Start New Patient Form</div>
+                <div class="card-body">
+                    <h4 class="card-title">Add A New Patient</h4>
+                    <p class="card-text">Register a Patient and Start a New ICP Form</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-4">
+        <a href="/edit-patient">
+            <div class="card text-white bg-warning mb-2" style="max-width: 30rem;max-height: 80rem;background-color:#FCD000!important;">
+                <div class="card-header">Edit Existing Form</div>
+                <div class="card-body">
+                    <h4 class="card-title">Edit Existing Patient Information</h4>
+                    <p class="card-text">Change or Add Information to Existing ICP Form</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<hr>
+<br>
+
+ <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i>  Patient Records</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Patient ID</th>
+                  <th>Date of Birth</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Patient ID</th>
+                  <th>Date of Birth</th>
+                </tr>
+              </tfoot>
+              <tbody>
+              {% for p in patients %}
+                <tr>
+                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.first_name}}</td>
+                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.last_name}}</td>
+                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.patient_id}}</td>
+                  <td><a href="{% url 'get_patient_information' p.patient_id %}" </a>{{p.date_of_birth | date:'d/m/Y'}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated, {{db_time}}</div>
+      </div>
+    </div>
+{% endblock %}
