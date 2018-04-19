@@ -7,6 +7,7 @@ from django.conf.urls import include, url
 
 
 urlpatterns = [
+
     url(r'^login/$', auth_views.login, {'template_name': 'form/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^password/$',views.change_password, name='change_password'),
@@ -23,3 +24,5 @@ urlpatterns = [
     path('<patient_id>/dysport_calculation_sheet',views.get_dysports,name='get_dysports'),
     path('<patient_id>/consent-to-photography-or-video-recording2',views.get_consentss,name='get_consentss'),
 ]
+
+

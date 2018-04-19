@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n-dd$j2-w!$k0cor!%7-lb4d!bw!5qy%q1%4hj_wn&7d9617ry'
+SECRET_KEY = os.environ.get("SECRETKEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['icp.azurewebsites.net']
 
 
 # Application definition
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'driver.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("DBNAME"),
+        'USER': os.environ.get("DBUSER"),
+        'PASSWORD': os.environ.get("DBPASS"),
+        'HOST': os.environ.get("DBHOST"),
+        'PORT': os.environ.get("DBPORT"),
     }
 }
 
@@ -119,6 +123,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_ROOT = 'D:/home/site/wwwroot/static'
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
