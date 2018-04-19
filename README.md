@@ -1,14 +1,8 @@
 # 103P_2018_team2
-Individual Care Pathway Platform for Dr. Lesley Katchburian
+Integrated Care Pathway Platform for Dr. Lesley Katchburian
 
-username: vanessa
-password: Django123
-
-username: chris
-password: Django123
-
-username: fareed
-password: Django123
+username: admin
+password: Django1234
 
 Test user accounts for clinicians (no admin access)
 
