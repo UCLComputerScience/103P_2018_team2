@@ -24,6 +24,13 @@ class PatientForm(forms.ModelForm):
         widgets = {
             'date_of_birth': DateInput(),
         }
+        labels = {
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
+            'patient_id': 'Patient ID',
+            'date_of_birth': 'Date of Birth',
+        }
+    
 
 class MedClerkPreSedForm(forms.ModelForm):
     patient = MedClerkPreSed.patient
