@@ -1,7 +1,11 @@
 # 103P_2018_team2
 Integrated Care Pathway Platform for Dr. Lesley Katchburian
 
-Admin Accounts: 
+[User Authentication]
+
+Admins can access admin portal within ICP, Clinicians lack this permission
+
+Administrator Accounts:
 
 username: lesleykatchburian
 password: Australia 
@@ -15,10 +19,19 @@ password: Django1234
 username: admin
 password: Django1234
 
-Test user accounts for clinicians (no admin access)
+Clinician Accounts:
 
 username: clairelewis
 password: Django123
 
 username: jamesdaniel
 password: Django123
+
+[Database Connection]
+
+PostgreSQL, Hosted on Azure
+
+server name: icpdbpg.postgres.database.azure.com
+database name: production
+username: rootroot@icpdbpg
+password: n2E-VyW-EDu-kUu
