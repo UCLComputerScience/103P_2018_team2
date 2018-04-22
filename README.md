@@ -32,6 +32,9 @@ password: Django123
 PostgreSQL, Hosted on Azure
 
 server name: icpdbpg.postgres.database.azure.com
+
 database name: production
+
 username: rootroot@icpdbpg
+
 password: n2E-VyW-EDu-kUu
